@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Consumo de API REST - Usuarios</title>
+  <link rel="stylesheet" href="./src/style.css">
+</head>
+
+<body>
+  
+  <main class="container">
+    
+    <header>
+      <h1>Directorio de Usuarios</h1>
+      <p>Consumo de API REST con TypeScript y Fetch API</p>
+    </header>
+
+    <div class="search-container"> 
+      <input 
+        type="text"
+        id="search-input" 
+        placeholder="🔍 Buscar por nombre..." />
+    </div>
+
+    <div id="loading" class="loading" aria-live="polite">
+      <span class="spinner" aria-hidden="true"></span>
+      <span>Cargando usuarios...</span>
+    </div>
+
+    <div id="error" class="error-message" hidden></div>
+    <section id="users-container" class="users-grid"></section>
+  </main>
+
+ 
+  <script type="module" src="/src/main.ts"></script>
+</body>
+
+<footer>
+  <p>&copy; 2026 Junior Yean Noel. Todos los derechos reservados.</p>
+</footer>
+
+
+</html>
