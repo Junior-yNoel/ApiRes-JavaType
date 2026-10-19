@@ -18,9 +18,11 @@
 
     <div class="search-container"> 
       <input 
-        type="text"
+        type="search"
         id="search-input" 
-        placeholder="🔍 Buscar por nombre..." />
+        placeholder="🔍 Buscar por nombre..."
+        aria-label="Buscar usuarios por nombre" />
+      <p id="search-status" class="visually-hidden" aria-live="polite"></p>
     </div>
 
     <div id="loading" class="loading" aria-live="polite">
@@ -32,13 +34,12 @@
     <section id="users-container" class="users-grid"></section>
   </main>
 
- 
+  <footer>
+    <p>&copy; 2026 Junior Yean Noel. Todos los derechos reservados.</p>
+  </footer>
+
   <script type="module" src="/src/main.ts"></script>
 </body>
-
-<footer>
-  <p>&copy; 2026 Junior Yean Noel. Todos los derechos reservados.</p>
-</footer>
 
 
 </html>
