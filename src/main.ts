@@ -8,6 +8,7 @@ const loadingElement = document.getElementById('loading') as HTMLDivElement;
 const errorElement = document.getElementById('error') as HTMLDivElement;
 const usersContainer = document.getElementById('users-container') as HTMLDivElement;
 const searchInput = document.getElementById('search-input') as HTMLInputElement;
+const searchStatus = document.getElementById('search-status') as HTMLParagraphElement;
 
 async function getUsers(): Promise<User[]> {
   try {
@@ -26,11 +27,27 @@ async function getUsers(): Promise<User[]> {
 }
 
 
-function renderUsers(users: User[]): void {
+function updateSearchStatus(count: number, isSearching: boolean): void {
+  if (!searchStatus) return;
+  if (!isSearching) {
+    searchStatus.textContent = '';
+    return;
+  }
+  if (count === 0) {
+    searchStatus.textContent = 'No se encontraron usuarios con ese nombre.';
+  } else if (count === 1) {
+    searchStatus.textContent = 'Mostrando 1 usuario.';
+  } else {
+    searchStatus.textContent = `Mostrando ${count} usuarios.`;
+  }
+}
+
+function renderUsers(users: User[], isSearching = false): void {
   usersContainer.innerHTML = '';
+  updateSearchStatus(users.length, isSearching);
 
   if (users.length === 0) { 
-    usersContainer.innerHTML = '<p>No se encontraron usuarios con ese nombre.</p>'; 
+    usersContainer.innerHTML = '<p class="no-results">No se encontraron usuarios con ese nombre.</p>';
     return; 
   }
 
@@ -58,14 +75,13 @@ function renderUsers(users: User[]): void {
 
 
 searchInput.addEventListener('input', (event) => {
-    const searchTerm = (event.target as HTMLInputElement).value.toLowerCase();
-
+    const searchTerm = (event.target as HTMLInputElement).value.trim().toLowerCase();
 
     const filteredUsers = allUsers.filter((user) => 
         user.name.toLowerCase().includes(searchTerm)
     );
 
-    renderUsers(filteredUsers); 
+    renderUsers(filteredUsers, searchTerm.length > 0);
 });
 
 
