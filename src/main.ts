@@ -30,7 +30,7 @@ function renderUsers(users: User[]): void {
   usersContainer.innerHTML = '';
 
   if (users.length === 0) { 
-    usersContainer.innerHTML = '<p>No se encontraron usuarios con ese nombre.</p>'; 
+    usersContainer.innerHTML = '<p class="no-results" role="status">No se encontraron usuarios con ese nombre.</p>';
     return; 
   }
 
@@ -45,7 +45,7 @@ function renderUsers(users: User[]): void {
       <div class="user-details">
         <p><strong>Email:</strong> ${user.email}</p>
         <p><strong>Teléfono:</strong> ${user.phone}</p>
-        <p><strong>Website:</strong> <a href="https://${user.website}" target="_blank" rel="noopener noreferrer">${user.website}</a></p>
+        <p><strong>Website:</strong> <a href="https://${user.website}" target="_blank" rel="noopener noreferrer" aria-label="Visitar ${user.website} (se abre en una nueva pestaña)">${user.website}</a></p>
         <p><strong>Empresa:</strong> ${user.company.name}</p>
         <p><strong>Ciudad:</strong> ${user.address.street}, ${user.address.suite}, ${user.address.city}, ${user.address.zipcode}</p>
       </div>
