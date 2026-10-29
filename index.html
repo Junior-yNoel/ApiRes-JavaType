@@ -17,10 +17,13 @@
     </header>
 
     <div class="search-container"> 
+      <label for="search-input" class="sr-only">Buscar usuarios por nombre</label>
       <input 
-        type="text"
+        type="search"
         id="search-input" 
-        placeholder="🔍 Buscar por nombre..." />
+        aria-label="Buscar por nombre"
+        placeholder="🔍 Buscar por nombre..."
+        autocomplete="off" />
     </div>
 
     <div id="loading" class="loading" aria-live="polite">

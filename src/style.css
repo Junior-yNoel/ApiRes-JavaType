@@ -99,11 +99,6 @@ header p {
     font-size: 0.95rem; 
 }
 
-.user-details a { 
-    color: #2563eb; 
-    text-decoration: none; 
-}
-
 .search-container {
   margin: 20px 0;
   text-align: left;
@@ -120,8 +115,37 @@ header p {
   transition: border-color 0.2s;
 }
 
-#search-input:focus {
+#search-input:focus-visible {
   border-color: #2563eb;
+  outline: 2px solid #2563eb;
+  outline-offset: 2px;
+}
+
+.user-details a {
+    color: #2563eb;
+    text-decoration: none;
+}
+
+.user-details a:hover {
+    text-decoration: underline;
+}
+
+.user-details a:focus-visible {
+    outline: 2px solid #2563eb;
+    outline-offset: 2px;
+    border-radius: 2px;
+}
+
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
 }
 
 .no-results {
