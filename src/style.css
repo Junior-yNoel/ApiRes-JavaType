@@ -102,6 +102,16 @@ header p {
 .user-details a { 
     color: #2563eb; 
     text-decoration: none; 
+    border-radius: 4px;
+}
+
+.user-details a:hover {
+    text-decoration: underline;
+}
+
+.user-details a:focus-visible {
+    outline: 2px solid #2563eb;
+    outline-offset: 2px;
 }
 
 .search-container {
@@ -117,11 +127,12 @@ header p {
   border: 2px solid #ddd;
   border-radius: 8px;
   outline: none;
-  transition: border-color 0.2s;
+  transition: border-color 0.2s, box-shadow 0.2s;
 }
 
-#search-input:focus {
+#search-input:focus-visible {
   border-color: #2563eb;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.2);
 }
 
 .no-results {
