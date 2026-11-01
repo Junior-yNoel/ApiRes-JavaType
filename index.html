@@ -18,8 +18,9 @@
 
     <div class="search-container"> 
       <input 
-        type="text"
+        type="search"
         id="search-input" 
+        aria-label="Buscar usuarios por nombre"
         placeholder="🔍 Buscar por nombre..." />
     </div>
 
@@ -29,7 +30,7 @@
     </div>
 
     <div id="error" class="error-message" hidden></div>
-    <section id="users-container" class="users-grid"></section>
+    <section id="users-container" class="users-grid" aria-live="polite" aria-atomic="true"></section>
   </main>
 
  
