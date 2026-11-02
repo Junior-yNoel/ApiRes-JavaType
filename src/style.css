@@ -122,6 +122,12 @@ header p {
 
 #search-input:focus {
   border-color: #2563eb;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.2);
+}
+
+#search-input:focus-visible {
+  outline: 2px solid #2563eb;
+  outline-offset: 1px;
 }
 
 .no-results {
@@ -130,6 +136,35 @@ header p {
   color: #6b7280;
   font-size: 1.1rem;
   margin-top: 20px;
+  background: white;
+  border-radius: 10px;
+  padding: 32px 20px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+}
+
+.no-results p {
+  margin: 0 0 16px 0;
+}
+
+.clear-search-btn {
+  background-color: #2563eb;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  padding: 8px 16px;
+  font-size: 0.95rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.clear-search-btn:hover {
+  background-color: #1d4ed8;
+}
+
+.clear-search-btn:focus-visible {
+  outline: 2px solid #2563eb;
+  outline-offset: 2px;
 }
 
 footer {

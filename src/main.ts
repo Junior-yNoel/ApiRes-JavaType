@@ -30,7 +30,20 @@ function renderUsers(users: User[]): void {
   usersContainer.innerHTML = '';
 
   if (users.length === 0) { 
-    usersContainer.innerHTML = '<p>No se encontraron usuarios con ese nombre.</p>'; 
+    usersContainer.innerHTML = `
+      <div class="no-results" role="status" aria-live="polite">
+        <p>No se encontraron usuarios con ese nombre.</p>
+        <button id="clear-search-btn" class="clear-search-btn" type="button">
+          Limpiar búsqueda
+        </button>
+      </div>
+    `;
+    const clearBtn = document.getElementById('clear-search-btn') as HTMLButtonElement | null;
+    clearBtn?.addEventListener('click', () => {
+      searchInput.value = '';
+      searchInput.focus();
+      renderUsers(allUsers);
+    });
     return; 
   }
 
@@ -60,12 +73,18 @@ function renderUsers(users: User[]): void {
 searchInput.addEventListener('input', (event) => {
     const searchTerm = (event.target as HTMLInputElement).value.toLowerCase();
 
-
     const filteredUsers = allUsers.filter((user) => 
         user.name.toLowerCase().includes(searchTerm)
     );
 
     renderUsers(filteredUsers); 
+});
+
+searchInput.addEventListener('keydown', (event: KeyboardEvent) => {
+    if (event.key === 'Escape' && searchInput.value) {
+        searchInput.value = '';
+        renderUsers(allUsers);
+    }
 });
 
 
