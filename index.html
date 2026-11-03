@@ -18,8 +18,9 @@
 
     <div class="search-container"> 
       <input 
-        type="text"
-        id="search-input" 
+        type="search"
+        id="search-input"
+        aria-label="Buscar usuarios por nombre"
         placeholder="🔍 Buscar por nombre..." />
     </div>
 
@@ -28,8 +29,8 @@
       <span>Cargando usuarios...</span>
     </div>
 
-    <div id="error" class="error-message" hidden></div>
-    <section id="users-container" class="users-grid"></section>
+    <div id="error" class="error-message" role="alert" hidden></div>
+    <section id="users-container" class="users-grid" aria-live="polite"></section>
   </main>
 
  
