@@ -29,9 +29,31 @@ async function getUsers(): Promise<User[]> {
 function renderUsers(users: User[]): void {
   usersContainer.innerHTML = '';
 
-  if (users.length === 0) { 
-    usersContainer.innerHTML = '<p>No se encontraron usuarios con ese nombre.</p>'; 
-    return; 
+  if (users.length === 0) {
+    const query = searchInput.value.trim();
+    const emptyState = document.createElement('div');
+    emptyState.className = 'no-results';
+    emptyState.setAttribute('role', 'status');
+
+    const msg = document.createElement('p');
+    msg.textContent = query
+      ? `No se encontraron usuarios que coincidan con "${query}".`
+      : 'No se encontraron usuarios.';
+
+    const clearButton = document.createElement('button');
+    clearButton.type = 'button';
+    clearButton.className = 'btn-reset';
+    clearButton.textContent = 'Limpiar búsqueda';
+    clearButton.addEventListener('click', () => {
+      searchInput.value = '';
+      searchInput.focus();
+      renderUsers(allUsers);
+    });
+
+    emptyState.appendChild(msg);
+    emptyState.appendChild(clearButton);
+    usersContainer.appendChild(emptyState);
+    return;
   }
 
   users.forEach((user) => {
