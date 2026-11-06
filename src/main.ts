@@ -8,6 +8,7 @@ const loadingElement = document.getElementById('loading') as HTMLDivElement;
 const errorElement = document.getElementById('error') as HTMLDivElement;
 const usersContainer = document.getElementById('users-container') as HTMLDivElement;
 const searchInput = document.getElementById('search-input') as HTMLInputElement;
+const searchCount = document.getElementById('search-count') as HTMLParagraphElement;
 
 async function getUsers(): Promise<User[]> {
   try {
@@ -26,11 +27,24 @@ async function getUsers(): Promise<User[]> {
 }
 
 
+function updateSearchCount(count: number, total: number): void {
+  if (!searchCount) return;
+  if (total === 0) {
+    searchCount.textContent = '';
+    return;
+  }
+  if (count === total) {
+    searchCount.textContent = `Mostrando ${count} ${count === 1 ? 'usuario' : 'usuarios'}`;
+  } else {
+    searchCount.textContent = `Mostrando ${count} de ${total} ${total === 1 ? 'usuario' : 'usuarios'}`;
+  }
+}
+
 function renderUsers(users: User[]): void {
   usersContainer.innerHTML = '';
 
   if (users.length === 0) { 
-    usersContainer.innerHTML = '<p>No se encontraron usuarios con ese nombre.</p>'; 
+    usersContainer.innerHTML = '<p class="no-results">No se encontraron usuarios con ese nombre.</p>';
     return; 
   }
 
@@ -58,14 +72,14 @@ function renderUsers(users: User[]): void {
 
 
 searchInput.addEventListener('input', (event) => {
-    const searchTerm = (event.target as HTMLInputElement).value.toLowerCase();
-
+    const searchTerm = (event.target as HTMLInputElement).value.toLowerCase().trim();
 
     const filteredUsers = allUsers.filter((user) => 
         user.name.toLowerCase().includes(searchTerm)
     );
 
-    renderUsers(filteredUsers); 
+    renderUsers(filteredUsers);
+    updateSearchCount(filteredUsers.length, allUsers.length);
 });
 
 
@@ -73,6 +87,7 @@ async function initApp(): Promise<void> {
   try {
     allUsers = await getUsers();
     renderUsers(allUsers);
+    updateSearchCount(allUsers.length, allUsers.length);
     loadingElement.style.display = 'none';
     errorElement.hidden = true;
     errorElement.textContent = '';

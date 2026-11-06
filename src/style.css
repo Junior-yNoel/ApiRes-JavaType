@@ -104,6 +104,18 @@ header p {
     text-decoration: none; 
 }
 
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
 .search-container {
   margin: 20px 0;
   text-align: left;
@@ -117,11 +129,21 @@ header p {
   border: 2px solid #ddd;
   border-radius: 8px;
   outline: none;
-  transition: border-color 0.2s;
+  transition: border-color 0.2s, box-shadow 0.2s;
+  box-sizing: border-box;
 }
 
+#search-input:focus-visible,
 #search-input:focus {
   border-color: #2563eb;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
+}
+
+.search-count {
+  margin: 8px 0 0 4px;
+  font-size: 0.875rem;
+  color: #6b7280;
+  min-height: 1.25rem;
 }
 
 .no-results {
