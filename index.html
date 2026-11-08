@@ -16,11 +16,24 @@
       <p>Consumo de API REST con TypeScript y Fetch API</p>
     </header>
 
-    <div class="search-container"> 
-      <input 
-        type="text"
-        id="search-input" 
-        placeholder="🔍 Buscar por nombre..." />
+    <div class="search-container">
+      <label for="search-input" class="sr-only">Buscar usuarios por nombre</label>
+      <div class="search-input-wrapper">
+        <input
+          type="search"
+          id="search-input"
+          placeholder="🔍 Buscar por nombre..."
+          aria-describedby="results-status" />
+        <button
+          type="button"
+          id="clear-search-btn"
+          class="clear-search-btn"
+          aria-label="Limpiar búsqueda"
+          hidden>
+          &times;
+        </button>
+      </div>
+      <p id="results-status" class="results-status" aria-live="polite"></p>
     </div>
 
     <div id="loading" class="loading" aria-live="polite">
