@@ -1,0 +1,3 @@
+## 2026-03-30 - Accessible search inputs and real-time result announcements
+**Learning:** In client-side filtered directories using plain HTML/TS, search inputs often lack `<label>` associations and screen reader notifications for filtered counts. Adding an explicit `<label class="sr-only">`, a clear button (`aria-label`) that restores focus, and an `aria-live="polite"` status message provides both sighted and assistive tech users immediate feedback without intrusive layout shifts.
+**Action:** When working on search and filter interfaces, bundle the input with a visually hidden label, a keyboard-accessible clear button, and a polite live status region.

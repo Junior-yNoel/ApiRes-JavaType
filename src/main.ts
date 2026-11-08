@@ -8,6 +8,8 @@ const loadingElement = document.getElementById('loading') as HTMLDivElement;
 const errorElement = document.getElementById('error') as HTMLDivElement;
 const usersContainer = document.getElementById('users-container') as HTMLDivElement;
 const searchInput = document.getElementById('search-input') as HTMLInputElement;
+const clearSearchBtn = document.getElementById('clear-search-btn') as HTMLButtonElement;
+const resultsStatus = document.getElementById('results-status') as HTMLParagraphElement;
 
 async function getUsers(): Promise<User[]> {
   try {
@@ -30,7 +32,7 @@ function renderUsers(users: User[]): void {
   usersContainer.innerHTML = '';
 
   if (users.length === 0) { 
-    usersContainer.innerHTML = '<p>No se encontraron usuarios con ese nombre.</p>'; 
+    usersContainer.innerHTML = '<p class="no-results">No se encontraron usuarios con ese nombre.</p>';
     return; 
   }
 
@@ -57,15 +59,35 @@ function renderUsers(users: User[]): void {
 
 
 
+function handleSearch(searchTerm: string): void {
+  const trimmed = searchTerm.trim().toLowerCase();
+  clearSearchBtn.hidden = trimmed.length === 0;
+
+  const filteredUsers = allUsers.filter((user) =>
+    user.name.toLowerCase().includes(trimmed)
+  );
+
+  renderUsers(filteredUsers);
+
+  if (allUsers.length > 0) {
+    if (trimmed.length > 0) {
+      resultsStatus.textContent = filteredUsers.length === 1
+        ? '1 usuario encontrado'
+        : `${filteredUsers.length} usuarios encontrados`;
+    } else {
+      resultsStatus.textContent = `Mostrando todos los usuarios (${allUsers.length})`;
+    }
+  }
+}
+
 searchInput.addEventListener('input', (event) => {
-    const searchTerm = (event.target as HTMLInputElement).value.toLowerCase();
+  handleSearch((event.target as HTMLInputElement).value);
+});
 
-
-    const filteredUsers = allUsers.filter((user) => 
-        user.name.toLowerCase().includes(searchTerm)
-    );
-
-    renderUsers(filteredUsers); 
+clearSearchBtn.addEventListener('click', () => {
+  searchInput.value = '';
+  searchInput.focus();
+  handleSearch('');
 });
 
 
@@ -73,6 +95,7 @@ async function initApp(): Promise<void> {
   try {
     allUsers = await getUsers();
     renderUsers(allUsers);
+    resultsStatus.textContent = `Mostrando todos los usuarios (${allUsers.length})`;
     loadingElement.style.display = 'none';
     errorElement.hidden = true;
     errorElement.textContent = '';
