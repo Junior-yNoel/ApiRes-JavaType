@@ -30,7 +30,7 @@ function renderUsers(users: User[]): void {
   usersContainer.innerHTML = '';
 
   if (users.length === 0) { 
-    usersContainer.innerHTML = '<p>No se encontraron usuarios con ese nombre.</p>'; 
+    usersContainer.innerHTML = '<div class="no-results" role="status"><p>No se encontraron usuarios con ese nombre.</p></div>';
     return; 
   }
 
